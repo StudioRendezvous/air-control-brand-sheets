@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hobbs — Endorsed Lockup Brand Sheet</title>
+  <style>
+    @page { size: 11in 8.5in landscape; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #F47920;
+      --off-black: #232121;
+      --white: #FFFFFF;
+      --gray: #6B6B6B;
+      --light-gray: #F5F5F5;
+      --green: #2E7D32;
+      --red: #C62828;
+    }
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: var(--off-black);
+      background: var(--white);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .sheet {
+      width: 11in;
+      height: 8.5in;
+      padding: 0.42in 0.48in 0.36in;
+      display: grid;
+      grid-template-columns: 4.1fr 5.4fr;
+      gap: 0.38in;
+      overflow: hidden;
+    }
+    h1.section-title {
+      font-size: 15pt;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.14in;
+      line-height: 1;
+    }
+    .label {
+      font-size: 6.5pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.08in;
+    }
+    .logo-col { display: flex; flex-direction: column; }
+    .logo-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 1.35in;
+      margin-bottom: 0.22in;
+    }
+    .logo-primary img { max-width: 100%; max-height: 1.2in; width: auto; height: auto; }
+    .logo-secondary {
+      background: var(--off-black);
+      border-radius: 2px;
+      padding: 0.22in 0.28in;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 1.05in;
+      margin-bottom: 0.2in;
+    }
+    .logo-secondary img { max-width: 100%; max-height: 0.85in; width: auto; height: auto; }
+    .donts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.07in;
+      margin-top: 0.04in;
+    }
+    .dont-card {
+      border: 1px solid #E0E0E0;
+      border-radius: 2px;
+      aspect-ratio: 1.15;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--light-gray);
+      overflow: hidden;
+    }
+    .dont-card .mini-logo {
+      max-width: 72%;
+      max-height: 55%;
+      opacity: 0.85;
+    }
+    .dont-card .x {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28pt;
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .dont-card.tilted .mini-logo { transform: rotate(-12deg); }
+    .dont-card.wrong-color .mini-logo { filter: hue-rotate(140deg) saturate(1.4); }
+    .dont-card.stretched .mini-logo { transform: scaleX(1.35); }
+    .dont-card.on-color { background: var(--orange); }
+    .dont-card.no-tag .tagline-hide { display: none; }
+    .dont-card.no-symbol .symbol-hide { display: none; }
+    .dont-card.symbol-only .wordmark-hide { display: none; }
+    .dont-card.symbol-only .mini-logo { max-width: 40%; }
+    .dont-card.outline .mini-logo { filter: contrast(0) brightness(0); opacity: 0.3; border: 1px dashed var(--off-black); }
+    .dont-label {
+      font-size: 5.5pt;
+      text-align: center;
+      margin-top: 0.03in;
+      line-height: 1.2;
+      color: var(--gray);
+    }
+    .lockup-col { display: flex; flex-direction: column; gap: 0.14in; }
+    .intro {
+      font-size: 7.25pt;
+      line-height: 1.45;
+      color: var(--off-black);
+      max-width: 96%;
+    }
+    .intro strong { font-weight: 700; }
+    .rules-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.18in;
+    }
+    .rules-box h3 {
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.07in;
+    }
+    .rules-box.do h3 { color: var(--green); }
+    .rules-box.dont h3 { color: var(--red); }
+    .rules-box ul {
+      list-style: none;
+      font-size: 6.25pt;
+      line-height: 1.38;
+    }
+    .rules-box li {
+      padding-left: 0.12in;
+      position: relative;
+      margin-bottom: 0.03in;
+    }
+    .rules-box.do li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+      font-size: 6pt;
+    }
+    .rules-box.dont li::before {
+      content: "✕";
+      position: absolute;
+      left: 0;
+      color: var(--red);
+      font-weight: 700;
+      font-size: 6pt;
+    }
+    .applications h3 {
+      font-size: 8pt;
+      font-weight: 700;
+      margin-bottom: 0.08in;
+    }
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.07in 0.1in;
+    }
+    .app-item {
+      background: var(--light-gray);
+      border-radius: 2px;
+      padding: 0.06in 0.07in 0.05in;
+      min-height: 0.72in;
+    }
+    .app-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.04in;
+      margin-bottom: 0.03in;
+    }
+    .app-name {
+      font-size: 6pt;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .app-badge {
+      font-size: 4.5pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.02in 0.04in;
+      border-radius: 2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .app-badge.required { background: var(--off-black); color: var(--white); }
+    .app-badge.optional { background: #E0E0E0; color: var(--gray); }
+    .app-desc {
+      font-size: 5.5pt;
+      line-height: 1.32;
+      color: #444;
+    }
+    .footer {
+      margin-top: auto;
+      padding-top: 0.08in;
+      border-top: 1px solid #E0E0E0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 0.2in;
+      font-size: 6pt;
+      line-height: 1.4;
+    }
+    .footer strong { font-weight: 700; }
+    .footer .portal { color: var(--orange); font-weight: 700; }
+    @media screen {
+      body { background: #ddd; padding: 24px; }
+      .sheet { margin: 0 auto; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="logo-col">
+      <h1 class="section-title">Logo</h1>
+
+      <div class="label">Primary</div>
+      <div class="logo-primary">
+        <img src="/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Logo Taglines/03 Exports/Hobbs - An Air Company/RGB - Digital/Primary Logo - RGB/Hobbs Logo-Air Company-RGB.svg" alt="Hobbs primary endorsed lockup">
+      </div>
+
+      <div class="label">Secondary</div>
+      <div class="logo-secondary">
+        <img src="/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Logo Taglines/03 Exports/Hobbs - An Air Company/RGB - Digital/Reverse Logo - RGB/Hobbs Logo-Air Company-Reverse-RGB.svg" alt="Hobbs reverse endorsed lockup">
+      </div>
+
+      <div class="label">Don'ts</div>
+      <div class="donts-grid">
+        <div>
+          <div class="dont-card no-tag"><img class="mini-logo" src="/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Logo Taglines/03 Exports/Hobbs - An Air Company/RGB - Digital/Primary Logo - RGB/Hobbs Logo-Air Company-RGB.svg" alt=""><span class="x">✕</span></div>
+          <div class="dont-label">Without AIR Tagline</div>
+        </div>
+        <div>
+          <div class="dont-card tilted"><img class="mini-logo" src="/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Logo Taglines/03 Exports/Hobbs - An Air Company/RGB - Digital/Primary Logo - RGB/Hobbs Logo-Air Company-RGB.svg" alt=""><span class="x">✕</span></div>
+          <div class="dont-label">On an Angle</div>
+        </div>
+        <div>
+          <div class="dont-card wrong-color"><img class="mini-logo" src="/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Logo Taglines/03 Exports/Hobbs - An Air Company/RGB - Digital/Primary Logo - RGB/Hobbs Logo-Air Company-RGB.svg" alt=""><span class="x">✕</span></div>
+          <div class="dont-label">Colors Changed</div>
+        </div>
+        <div>
+          <div class="dont-card stretched"><img class="mini-logo" src="/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Logo Taglines/03 Exports/Hobbs - An Air Company/RGB - Digital/Primary Logo - RGB/Hobbs Logo-Air Company-RGB.svg" alt=""><span class="x">✕</span></div>
+          <div class="dont-label">Imperfect Scaling</div>
+        </div>
+        <div>
+          <div class="dont-card on-color"><img class="mini-logo" src="/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Logo Taglines/03 Exports/Hobbs - An Air Company/RGB - Digital/Primary Logo - RGB/Hobbs Logo-Air Company-RGB.svg" alt=""><span class="x">✕</span></div>
+          <div class="dont-label">On Colored Background</div>
+        </div>
+        <div>
+          <div class="dont-card no-symbol"><img class="mini-logo" src="/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Logo Taglines/03 Exports/Hobbs - An Air Company/RGB - Digital/Primary Logo - RGB/Hobbs Logo-Air Company-RGB.svg" alt=""><span class="x">✕</span></div>
+          <div class="dont-label">Without Symbol</div>
+        </div>
+        <div>
+          <div class="dont-card symbol-only"><img class="mini-logo" src="/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Logo Taglines/03 Exports/Hobbs - An Air Company/RGB - Digital/Primary Logo - RGB/Hobbs Logo-Air Company-RGB.svg" alt=""><span class="x">✕</span></div>
+          <div class="dont-label">Symbol Only</div>
+        </div>
+        <div>
+          <div class="dont-card outline"><img class="mini-logo" src="/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Logo Taglines/03 Exports/Hobbs - An Air Company/RGB - Digital/Primary Logo - RGB/Hobbs Logo-Air Company-RGB.svg" alt=""><span class="x">✕</span></div>
+          <div class="dont-label">Outlines</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lockup-col">
+      <h1 class="section-title">Endorsed Lockup</h1>
+
+      <p class="intro">
+        Each operating company carries the <strong>AN AIR COMPANY</strong> endorsement mark beneath its name.
+        This signals platform membership — without replacing local brand identity. Your name stays primary;
+        the AIR lockup signals backing, scale, and shared standards.
+      </p>
+
+      <div class="rules-row">
+        <div class="rules-box do">
+          <h3>Do</h3>
+          <ul>
+            <li>Place the AN AIR COMPANY lockup directly below the OpCo logo</li>
+            <li>Use approved single-color (black or white) lockup on colored backgrounds</li>
+            <li>Maintain clear space equal to the letter-height of A in AIR on all sides</li>
+            <li>Apply consistently across all customer-facing touchpoints</li>
+            <li>Download files from the AIRlink portal — never recreate the lockup manually</li>
+          </ul>
+        </div>
+        <div class="rules-box dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Recreate, resize, or retype the endorsement mark by hand</li>
+            <li>Use the AIR primary wordmark in place of the endorsement lockup</li>
+            <li>Place the AIR logo separately as if it were a standalone brand</li>
+            <li>Alter proportions, colors, or spacing of the combined lockup</li>
+            <li>Apply the lockup over busy backgrounds without sufficient contrast</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="applications">
+        <h3>Field Applications</h3>
+        <div class="app-grid">
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">New Fleet Vehicles</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Full OpCo + AIR lockup on all new service vehicles and trailer wraps. White lockup for dark vehicles; color on white.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Business Cards</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">OpCo logo anchors card front. AN AIR COMPANY lockup in footer. Min. 6pt; never smaller than 80% of OpCo name.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Trade Show Signage</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Full-color lockup on booth banners, backdrops, and pop-up displays. AIR standards govern AIR-hosted events.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">New Building Signage</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Lockup on all new exterior and interior facility signage. Prioritize main entrance, reception, and customer areas.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Proposals &amp; Scope Docs</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Include on cover pages and running footers of customer-facing proposals, quotes, and scope documents.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Websites</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Add endorsement to website footer and About page. Link to aircontrolconcepts.com. Coordinate before homepage redesign.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Digital &amp; Social Media</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Include in LinkedIn, Facebook, and social profile bios. Email signature references AN AIR COMPANY below OpCo name.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Print &amp; Digital Collateral</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Apply to all new brochures, sell sheets, spec sheets, capabilities decks, and email marketing templates.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Apparel</span><span class="app-badge optional">Optional</span></div>
+            <p class="app-desc">At OpCo discretion. AN AIR COMPANY may appear on sleeve or collar as secondary mark. OpCo name remains primary.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div>
+          <strong>AIRlink Brand Portal</strong><br>
+          Download approved lockup files on <span class="portal">AIRlink Market COE</span>
+        </div>
+        <div>
+          <strong>Questions?</strong><br>
+          AIR Marketing — marketing@aircontrolconcepts.com
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
