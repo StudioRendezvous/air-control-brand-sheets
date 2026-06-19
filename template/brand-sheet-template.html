@@ -91,7 +91,7 @@
       justify-content: flex-start;
       min-height: 1.1in;
     }
-    .logo-secondary {
+    .logo-reversed {
       background: var(--off-black);
       border-radius: 2px;
       padding: 0.12in 0.16in;
@@ -101,6 +101,7 @@
       width: fit-content;
       max-width: 100%;
     }
+    {{LOGO_EXTRA_CSS}}
     .lockup-section {
       grid-column: 1 / -1;
       grid-row: 3;
@@ -134,7 +135,6 @@
       row-gap: 0.14in;
       justify-content: start;
       align-items: start;
-      margin-top: auto;
     }
     .dont-item {
       display: flex;
@@ -350,8 +350,9 @@
       gap: 4px;
     }
     .nav-select {
-      min-width: 140px;
-      max-width: 200px;
+      min-width: 280px;
+      max-width: 340px;
+      width: auto;
       margin-right: 12px;
       padding: 5px 28px 5px 10px;
       border: 1px solid rgba(255,255,255,0.2);
@@ -409,46 +410,36 @@
         <img src="{{PRIMARY_LOGO}}" alt="{{COMPANY_NAME}} primary endorsed lockup">
       </div>
 
-      <div class="label">Secondary</div>
-      <div class="logo-display logo-secondary">
-        <img src="{{REVERSE_LOGO}}" alt="{{COMPANY_NAME}} reverse endorsed lockup">
+      <div class="label">Reversed</div>
+      <div class="logo-display logo-reversed">
+        <img src="{{REVERSE_LOGO}}" alt="{{COMPANY_NAME}} reversed endorsed lockup">
       </div>
     </div>
 
     <div class="donts-col">
       <h1 class="section-title">Don'ts</h1>
       <div class="donts-grid">
-        <div class="dont-item">
-          <div class="dont-label">Without AIR Tagline</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/01-without-air-tagline.png" alt=""></div>
-        </div>
+        {{TAGLINE_DONT_ITEM}}
         <div class="dont-item">
           <div class="dont-label">On an Angle</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/02-on-an-angle.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/02-on-an-angle.png?v={{ASSET_VERSION}}" alt=""></div>
         </div>
         <div class="dont-item">
           <div class="dont-label">Colors Changed</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/03-colors-changed.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/03-colors-changed.png?v={{ASSET_VERSION}}" alt=""></div>
         </div>
         <div class="dont-item">
           <div class="dont-label">Imperfect Scaling</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/04-imperfect-scaling.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/04-imperfect-scaling.png?v={{ASSET_VERSION}}" alt=""></div>
         </div>
         <div class="dont-item">
           <div class="dont-label">On Colored Background</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/05-on-colored-background.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/05-on-colored-background.png?v={{ASSET_VERSION}}" alt=""></div>
         </div>
-        <div class="dont-item">
-          <div class="dont-label">Without Symbol</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/06-without-symbol.png" alt=""></div>
-        </div>
-        <div class="dont-item">
-          <div class="dont-label">Symbol Only</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/07-symbol-only.png" alt=""></div>
-        </div>
+        {{SYMBOL_DONTS_ITEMS}}
         <div class="dont-item">
           <div class="dont-label">Outlines</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/08-outlines.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/08-outlines.png?v={{ASSET_VERSION}}" alt=""></div>
         </div>
       </div>
     </div>

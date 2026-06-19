@@ -91,7 +91,7 @@
       justify-content: flex-start;
       min-height: 1.1in;
     }
-    .logo-secondary {
+    .logo-reversed {
       background: var(--off-black);
       border-radius: 2px;
       padding: 0.12in 0.16in;
@@ -101,6 +101,7 @@
       width: fit-content;
       max-width: 100%;
     }
+    
     .lockup-section {
       grid-column: 1 / -1;
       grid-row: 3;
@@ -134,7 +135,6 @@
       row-gap: 0.14in;
       justify-content: start;
       align-items: start;
-      margin-top: auto;
     }
     .dont-item {
       display: flex;
@@ -350,8 +350,9 @@
       gap: 4px;
     }
     .nav-select {
-      min-width: 140px;
-      max-width: 200px;
+      min-width: 280px;
+      max-width: 340px;
+      width: auto;
       margin-right: 12px;
       padding: 5px 28px 5px 10px;
       border: 1px solid rgba(255,255,255,0.2);
@@ -406,7 +407,7 @@
   <nav class="sheet-nav" aria-label="Brand sheet navigation">
     <div class="nav-controls">
       <select class="nav-select" aria-label="Select company" onchange="if(this.value) window.location.href=this.value">
-        <option value="../advanced-thermal-solutions/index.html">Advanced Thermal Solutions</option><option value="../air-carolinas/index.html">Air Carolinas</option><option value="../air-components/index.html">Air Components</option><option value="../air-mission-critical/index.html">Air Mission Critical</option><option value="../airetech/index.html">Airetech</option><option value="../bcs-building-controls-and-services/index.html">BCS Building Controls and Services</option><option value="../bay-associates/index.html">Bay Associates</option><option value="../bluefield-systems/index.html">Bluefield Systems</option><option value="../c-j-building-solutions/index.html">C&J Building Solutions</option><option value="../cg-wood/index.html">CG Wood</option><option value="../dorse/index.html">Dorse</option><option value="../ebs/index.html">EBS</option><option value="../eci/index.html">ECI</option><option value="../enerfit/index.html">EnerFit</option><option value="../energy-transfer-solutions/index.html">Energy Transfer Solutions</option><option value="../engineered-products/index.html">Engineered Products</option><option value="../etairos-hvac/index.html">Etairos HVAC</option><option value="../fes-fluid-equipment-solutions/index.html">FES Fluid Equipment Solutions</option><option value="../force-equipment/index.html">Force Equipment</option><option value="../georgia-air-associates/index.html">Georgia Air Associates</option><option value="../hd-grant-co/index.html" selected>HD Grant Co</option><option value="../hobbs/index.html">Hobbs</option><option value="../insight-partners/index.html">Insight Partners</option><option value="../jjp-mechanical-reps/index.html">JJP Mechanical Reps</option><option value="../jm-oconnor/index.html">JM OConnor</option><option value="../jmb-associates/index.html">JMB & Associates</option><option value="../jobe-industrial-control-measurement/index.html">Jobe Industrial Control & Measurement</option><option value="../jorban-riscoe/index.html">Jorban Riscoe</option><option value="../klima-nj/index.html">Klima NJ</option><option value="../klima-ny/index.html">Klima NY</option><option value="../mms-midwest-mechanical-solutions/index.html">MMS Midwest Mechanical Solutions</option><option value="../mri-mechanical-reps/index.html">MRI Mechanical Reps</option><option value="../marrs/index.html">Marrs</option><option value="../mechanical-and-plumbing-systems/index.html">Mechanical and Plumbing Systems</option><option value="../midwest-machinery/index.html">Midwest Machinery</option><option value="../nationwide-electric-supply/index.html">Nationwide Electric Supply</option><option value="../northrich-company/index.html">Northrich Company</option><option value="../odell-hvac/index.html">ODell HVAC</option><option value="../rea/index.html">REA</option><option value="../rl-craig-company/index.html">RL Craig Company</option><option value="../slade-ross-inc/index.html">Slade Ross Inc</option><option value="../stan-weaver/index.html">Stan Weaver</option><option value="../tko/index.html">TKO</option><option value="../technical-air-systems/index.html">Technical Air Systems</option><option value="../thermair-systems/index.html">ThermAir Systems</option>
+        <option value="../advanced-thermal-solutions/index.html">Advanced Thermal Solutions</option><option value="../air-carolinas/index.html">Air Carolinas</option><option value="../air-components/index.html">Air Components</option><option value="../air-mission-critical/index.html">Air Mission Critical</option><option value="../airetech/index.html">Airetech</option><option value="../bcs-building-controls-and-services/index.html">BCS Building Controls and Services</option><option value="../bay-associates/index.html">Bay Associates</option><option value="../bluefield-systems/index.html">Bluefield Systems</option><option value="../c-j-building-solutions/index.html">C&J Building Solutions</option><option value="../cg-wood/index.html">CG Wood</option><option value="../cardinal-control-systems/index.html">Cardinal Control Systems</option><option value="../dorse/index.html">Dorse</option><option value="../ebs/index.html">EBS</option><option value="../eci/index.html">ECI</option><option value="../enerfit/index.html">EnerFit</option><option value="../energy-transfer-solutions/index.html">Energy Transfer Solutions</option><option value="../engineered-products/index.html">Engineered Products</option><option value="../etairos-hvac/index.html">Etairos HVAC</option><option value="../fes-fluid-equipment-solutions/index.html">FES Fluid Equipment Solutions</option><option value="../force-equipment/index.html">Force Equipment</option><option value="../georgia-air-associates/index.html">Georgia Air Associates</option><option value="../hd-grant-co/index.html" selected>HD Grant Co</option><option value="../hobbs/index.html">Hobbs</option><option value="../insight-partners/index.html">Insight Partners</option><option value="../jjp-mechanical-reps/index.html">JJP Mechanical Reps</option><option value="../jm-oconnor/index.html">JM OConnor</option><option value="../jmb-associates/index.html">JMB & Associates</option><option value="../jobe-industrial-control-measurement/index.html">Jobe Industrial Control & Measurement</option><option value="../jorban-riscoe/index.html">Jorban Riscoe</option><option value="../klima-nj/index.html">Klima NJ</option><option value="../klima-ny/index.html">Klima NY</option><option value="../mms-midwest-mechanical-solutions/index.html">MMS Midwest Mechanical Solutions</option><option value="../mri-mechanical-reps/index.html">MRI Mechanical Reps</option><option value="../marrs/index.html">Marrs</option><option value="../mechanical-and-plumbing-systems/index.html">Mechanical and Plumbing Systems</option><option value="../midwest-machinery/index.html">Midwest Machinery</option><option value="../nationwide-electric-supply/index.html">Nationwide Electric Supply</option><option value="../northrich-company/index.html">Northrich Company</option><option value="../odell-hvac/index.html">ODell HVAC</option><option value="../rea/index.html">REA</option><option value="../rl-craig-company/index.html">RL Craig Company</option><option value="../slade-ross-inc/index.html">Slade Ross Inc</option><option value="../stan-weaver/index.html">Stan Weaver</option><option value="../tko/index.html">TKO</option><option value="../technical-air-systems/index.html">Technical Air Systems</option><option value="../thermair-systems/index.html">ThermAir Systems</option>
       </select>
       <a class="nav-btn" href="../georgia-air-associates/index.html">← Prev</a>
       <a class="nav-btn" href="../hobbs/index.html">Next →</a>
@@ -423,46 +424,48 @@
         <img src="assets/HD Grant Co Logo v2-Air Company-RGB.png" alt="HD Grant Co primary endorsed lockup">
       </div>
 
-      <div class="label">Secondary</div>
-      <div class="logo-display logo-secondary">
-        <img src="assets/HD Grant Co Logo-Air Company-Reverse-RGB.svg" alt="HD Grant Co reverse endorsed lockup">
+      <div class="label">Reversed</div>
+      <div class="logo-display logo-reversed">
+        <img src="assets/HD Grant Co Logo-Air Company-Reverse-RGB.svg" alt="HD Grant Co reversed endorsed lockup">
       </div>
     </div>
 
     <div class="donts-col">
       <h1 class="section-title">Don'ts</h1>
       <div class="donts-grid">
-        <div class="dont-item">
+                <div class="dont-item">
           <div class="dont-label">Without AIR Tagline</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/01-without-air-tagline.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/01-without-air-tagline.png?v=202606181846" alt=""></div>
         </div>
+
         <div class="dont-item">
           <div class="dont-label">On an Angle</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/02-on-an-angle.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/02-on-an-angle.png?v=202606181846" alt=""></div>
         </div>
         <div class="dont-item">
           <div class="dont-label">Colors Changed</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/03-colors-changed.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/03-colors-changed.png?v=202606181846" alt=""></div>
         </div>
         <div class="dont-item">
           <div class="dont-label">Imperfect Scaling</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/04-imperfect-scaling.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/04-imperfect-scaling.png?v=202606181846" alt=""></div>
         </div>
         <div class="dont-item">
           <div class="dont-label">On Colored Background</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/05-on-colored-background.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/05-on-colored-background.png?v=202606181846" alt=""></div>
         </div>
-        <div class="dont-item">
+                <div class="dont-item">
           <div class="dont-label">Without Symbol</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/06-without-symbol.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/06-without-symbol.png?v=202606181846" alt=""></div>
         </div>
         <div class="dont-item">
           <div class="dont-label">Symbol Only</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/07-symbol-only.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/07-symbol-only.png?v=202606181846" alt=""></div>
         </div>
+
         <div class="dont-item">
           <div class="dont-label">Outlines</div>
-          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/08-outlines.png" alt=""></div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/08-outlines.png?v=202606181846" alt=""></div>
         </div>
       </div>
     </div>

@@ -1,0 +1,11 @@
+{
+  "cardinal-control-systems": {
+    "logo_height": "1.25in",
+    "angle_rotation": 30,
+    "angle_scale": 1.42,
+    "angle_max_w": 0.90,
+    "angle_max_h": 0.76,
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  }
+}
