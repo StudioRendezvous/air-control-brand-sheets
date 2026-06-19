@@ -346,16 +346,45 @@ def render_sheet(
     return html
 
 
+def output_primary_logo_name(company_id: str) -> str | None:
+    """Primary logo filename already copied into output/{id}/assets/."""
+    assets_dir = OUTPUT_DIR / company_id / "assets"
+    if not assets_dir.is_dir():
+        return None
+
+    def is_primary_logo(path: Path) -> bool:
+        name = path.name.lower()
+        if path.suffix.lower() not in LOGO_EXTENSIONS:
+            return False
+        if "air-control" in name:
+            return False
+        return "reverse" not in name
+
+    def rank(path: Path) -> tuple[int, int, str]:
+        numbered = bool(re.search(r"-\d+$", path.stem))
+        ext_rank = 0 if path.suffix.lower() == ".png" else 1
+        return (1 if numbered else 0, ext_rank, path.name.lower())
+
+    candidates = sorted(
+        (p for p in assets_dir.iterdir() if is_primary_logo(p)),
+        key=rank,
+    )
+    return candidates[0].name if candidates else None
+
+
 def write_index_page(companies: list[dict], dest: Path) -> None:
     ready = ready_companies(companies)
-    cards = "\n".join(
-        f'      <a class="company-card" href="{c["id"]}/index.html">'
-        f'<img class="company-logo" src="{c["id"]}/assets/{Path(c["primary_logo"]).name}" '
-        f'alt="" loading="lazy">'
-        f'<span class="company-name">{c["name"]}</span>'
-        f'<span class="company-arrow">→</span></a>'
-        for c in ready
-    )
+    cards = []
+    for c in ready:
+        logo_name = output_primary_logo_name(c["id"]) or Path(c["primary_logo"]).name
+        cards.append(
+            f'      <a class="company-card" href="{c["id"]}/index.html">'
+            f'<img class="company-logo" src="{c["id"]}/assets/{logo_name}" '
+            f'alt="" loading="lazy">'
+            f'<span class="company-name">{c["name"]}</span>'
+            f'<span class="company-arrow">→</span></a>'
+        )
+    cards_html = "\n".join(cards)
     options = "\n".join(
         f'        <option value="{c["id"]}/index.html">{c["name"]}</option>'
         for c in ready
@@ -363,7 +392,7 @@ def write_index_page(companies: list[dict], dest: Path) -> None:
 
     template = INDEX_TEMPLATE.read_text(encoding="utf-8")
     html = template.replace("{{COMPANY_COUNT}}", str(len(ready)))
-    html = html.replace("{{COMPANY_CARDS}}", cards)
+    html = html.replace("{{COMPANY_CARDS}}", cards_html)
     html = html.replace("{{COMPANY_OPTIONS}}", options)
     dest.write_text(html, encoding="utf-8")
 
