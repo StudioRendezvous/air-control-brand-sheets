@@ -37,5 +37,37 @@
   "mechanical-and-plumbing-systems": {
     "tagline_max_w": 0.86,
     "tagline_max_h": 0.72
+  },
+  "midwest-machinery": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "nationwide-electric-supply": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "northrich-company": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "odell-hvac": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "slade-ross-inc": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "tko": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "technical-air-systems": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "insight-partners": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
   }
 }
