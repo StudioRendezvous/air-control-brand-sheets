@@ -11,7 +11,13 @@ from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from dont_generator import generate_company_donts, generate_dont_variant
+from dont_generator import (
+    generate_company_donts,
+    generate_dont_variant,
+    has_opaque_dark_backdrop,
+    remove_pure_black_backdrop,
+)
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = ROOT / "template" / "brand-sheet-template.html"
@@ -60,16 +66,10 @@ def discover_companies(exports_root: Path) -> list[dict]:
         reverse_logo = None
 
         if primary.exists():
-            for candidate in primary.iterdir():
-                if candidate.suffix.lower() in {".svg", ".png"}:
-                    primary_logo = str(candidate.resolve())
-                    break
+            primary_logo = pick_logo_file(primary)
 
         if reverse.exists():
-            for candidate in reverse.iterdir():
-                if candidate.suffix.lower() in {".svg", ".png"}:
-                    reverse_logo = str(candidate.resolve())
-                    break
+            reverse_logo = pick_logo_file(reverse)
 
         companies.append(
             {
@@ -85,6 +85,14 @@ def discover_companies(exports_root: Path) -> list[dict]:
 
 
 LOGO_EXTENSIONS = (".svg", ".png", ".jpg", ".jpeg")
+
+
+def pick_logo_file(directory: Path) -> str | None:
+    candidates = sorted(
+        (p for p in directory.iterdir() if p.suffix.lower() in LOGO_EXTENSIONS),
+        key=lambda p: (0 if p.suffix.lower() == ".png" else 1, p.name.lower()),
+    )
+    return str(candidates[0].resolve()) if candidates else None
 
 
 def apply_logo_overrides(companies: list[dict]) -> list[dict]:
@@ -242,6 +250,10 @@ DONT_VARIANT_KEYS = (
     "angle_max_h",
     "tagline_max_w",
     "tagline_max_h",
+    "symbol_only_max_w",
+    "symbol_only_max_h",
+    "wordmark_max_w",
+    "wordmark_max_h",
 )
 
 
@@ -368,6 +380,17 @@ def copy_air_logo(dest_dir: Path) -> None:
         target.write_bytes(AIR_LOGO_SOURCE.read_bytes())
 
 
+def write_logo_asset(source: Path, dest: Path, *, reverse: bool = False) -> None:
+    """Copy logo art into the sheet folder, stripping black plates from reverse PNGs."""
+    if source.suffix.lower() == ".png":
+        image = Image.open(source).convert("RGBA")
+        if reverse and has_opaque_dark_backdrop(image):
+            image = remove_pure_black_backdrop(image)
+        image.save(dest, format="PNG")
+        return
+    dest.write_bytes(source.read_bytes())
+
+
 def write_company_assets(
     company: dict,
     dest_dir: Path,
@@ -385,8 +408,7 @@ def write_company_assets(
         source = Path(src)
         if source.exists():
             target = assets_dir / source.name
-            if not target.exists():
-                target.write_bytes(source.read_bytes())
+            write_logo_asset(source, target, reverse=(key == "reverse_logo"))
 
     no_symbol_dont_ids = no_symbol_dont_ids or set()
     company_overrides = company_overrides or {}

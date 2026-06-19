@@ -258,6 +258,9 @@ def compose_variant(
     elif variant == "02-on-an-angle":
         max_w = int(CANVAS_SIZE[0] * float(opts.get("angle_max_w", 0.86)))
         max_h = int(CANVAS_SIZE[1] * float(opts.get("angle_max_h", 0.72)))
+    elif variant == "07-symbol-only":
+        max_w = int(CANVAS_SIZE[0] * float(opts.get("symbol_only_max_w", 0.86)))
+        max_h = int(CANVAS_SIZE[1] * float(opts.get("symbol_only_max_h", 0.72)))
     else:
         max_w = int(CANVAS_SIZE[0] * 0.86)
         max_h = int(CANVAS_SIZE[1] * 0.72)
@@ -289,15 +292,25 @@ def has_opaque_dark_backdrop(image: Image.Image, threshold: int = 42) -> bool:
     return dark_opaque >= 3
 
 
-def compose_asset_dont(asset: Image.Image) -> Image.Image:
+def compose_asset_dont(
+    asset: Image.Image,
+    *,
+    variant_options: dict | None = None,
+    kind: str = "symbol",
+) -> Image.Image:
     """Build a standard don't frame from a standalone symbol or wordmark asset."""
+    opts = variant_options or {}
     working = asset.copy()
     if has_opaque_dark_backdrop(working):
         working = remove_pure_black_backdrop(working)
     working = remove_near_white_background(working)
     working = crop_to_alpha_bbox(working)
-    max_w = int(CANVAS_SIZE[0] * 0.86)
-    max_h = int(CANVAS_SIZE[1] * 0.72)
+    if kind == "symbol":
+        max_w = int(CANVAS_SIZE[0] * float(opts.get("symbol_only_max_w", 0.86)))
+        max_h = int(CANVAS_SIZE[1] * float(opts.get("symbol_only_max_h", 0.72)))
+    else:
+        max_w = int(CANVAS_SIZE[0] * float(opts.get("wordmark_max_w", 0.86)))
+        max_h = int(CANVAS_SIZE[1] * float(opts.get("wordmark_max_h", 0.72)))
     working = fit_logo(working, max_w, max_h)
     canvas = blank_canvas()
     canvas = paste_centered(canvas, working)
@@ -393,7 +406,12 @@ def generate_company_donts(
             asset_path = find_symbol_asset(symbols_dir, symbol_sources[filename])
             if asset_path:
                 asset = load_logo_image(asset_path)
-                compose_asset_dont(asset).convert("RGB").save(dest, format="PNG")
+                kind = symbol_sources[filename]
+                compose_asset_dont(
+                    asset,
+                    variant_options=variant_options,
+                    kind=kind,
+                ).convert("RGB").save(dest, format="PNG")
                 continue
 
         variant = filename.replace(".png", "")

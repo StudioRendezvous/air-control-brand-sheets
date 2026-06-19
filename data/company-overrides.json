@@ -7,5 +7,9 @@
     "angle_max_h": 0.76,
     "tagline_max_w": 0.86,
     "tagline_max_h": 0.72
+  },
+  "force-equipment": {
+    "symbol_only_max_w": 0.78,
+    "symbol_only_max_h": 0.66
   }
 }
