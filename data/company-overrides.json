@@ -69,5 +69,21 @@
   "insight-partners": {
     "tagline_max_w": 0.86,
     "tagline_max_h": 0.72
+  },
+  "ebs": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "eci": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "enerfit": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "georgia-air-associates": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
   }
 }
