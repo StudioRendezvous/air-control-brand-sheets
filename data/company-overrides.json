@@ -11,5 +11,31 @@
   "force-equipment": {
     "symbol_only_max_w": 0.78,
     "symbol_only_max_h": 0.66
+  },
+  "fes-fluid-equipment-solutions": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "hd-grant-co": {
+    "wordmark_max_w": 0.76,
+    "wordmark_max_h": 0.64,
+    "symbol_only_max_w": 0.72,
+    "symbol_only_max_h": 0.62
+  },
+  "jm-oconnor": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "mri-mechanical-reps": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "marrs": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
+  "mechanical-and-plumbing-systems": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
   }
 }

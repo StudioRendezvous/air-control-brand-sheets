@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import shutil
 import subprocess
 import tempfile
 from pathlib import Path
@@ -325,21 +326,54 @@ def find_symbol_asset(symbols_dir: Path, base_name: str) -> Path | None:
     return None
 
 
-def apply_override(source: Path, dest: Path) -> None:
-    image = Image.open(source).convert("RGBA")
-    if image.size != CANVAS_SIZE:
-        fitted = Image.new("RGBA", CANVAS_SIZE, (255, 255, 255, 255))
-        ratio = min(CANVAS_SIZE[0] / image.width, CANVAS_SIZE[1] / image.height)
-        size = (
-            max(1, int(image.width * ratio)),
-            max(1, int(image.height * ratio)),
-        )
-        resized = image.resize(size, Image.Resampling.LANCZOS)
-        x = (CANVAS_SIZE[0] - size[0]) // 2
-        y = (CANVAS_SIZE[1] - size[1]) // 2
-        fitted.paste(resized, (x, y), resized)
-        image = fitted
-    result = draw_red_x(image)
+def copy_override_exact(source: Path, dest: Path) -> None:
+    """Use a finished override file as-is (no resize, backdrop strip, or red X)."""
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source, dest)
+
+
+def fit_override_exact(
+    source: Path,
+    dest: Path,
+    *,
+    variant_options: dict | None = None,
+) -> None:
+    """Scale a finished override to the don't frame; keep artwork and alpha untouched."""
+    opts = variant_options or {}
+    image = load_logo_image(source)
+    working = crop_to_alpha_bbox(image)
+    max_w = int(CANVAS_SIZE[0] * float(opts.get("tagline_max_w", 0.58)))
+    max_h = int(CANVAS_SIZE[1] * float(opts.get("tagline_max_h", 0.46)))
+    working = fit_logo(working, max_w, max_h)
+    canvas = Image.new("RGBA", CANVAS_SIZE, (0, 0, 0, 0))
+    canvas = paste_centered(canvas, working)
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    canvas.save(dest, format="PNG")
+
+
+def apply_override(
+    source: Path,
+    dest: Path,
+    *,
+    filename: str | None = None,
+    variant_options: dict | None = None,
+) -> None:
+    opts = variant_options or {}
+    image = load_logo_image(source)
+    working = crop_to_alpha_bbox(image)
+    if filename == "06-without-symbol.png":
+        max_w = int(CANVAS_SIZE[0] * float(opts.get("wordmark_max_w", 0.86)))
+        max_h = int(CANVAS_SIZE[1] * float(opts.get("wordmark_max_h", 0.72)))
+    elif filename == "07-symbol-only.png":
+        max_w = int(CANVAS_SIZE[0] * float(opts.get("symbol_only_max_w", 0.86)))
+        max_h = int(CANVAS_SIZE[1] * float(opts.get("symbol_only_max_h", 0.72)))
+    else:
+        max_w = int(CANVAS_SIZE[0] * float(opts.get("override_max_w", 0.86)))
+        max_h = int(CANVAS_SIZE[1] * float(opts.get("override_max_h", 0.72)))
+    working = fit_logo(working, max_w, max_h)
+    canvas = blank_canvas()
+    canvas = paste_centered(canvas, working)
+    result = draw_red_x(canvas)
     result.convert("RGB").save(dest, format="PNG")
 
 
@@ -352,8 +386,11 @@ def apply_tagline_override(
     """Place a no-tagline lockup on white with breathing room and a red X."""
     opts = variant_options or {}
     image = load_logo_image(source)
-    working = remove_near_dark_background(image, threshold=55)
-    working = remove_near_white_background(working)
+    working = image.copy()
+    if has_opaque_dark_backdrop(working):
+        working = remove_near_dark_background(working, threshold=55)
+    else:
+        working = remove_near_white_background(working)
     working = crop_to_alpha_bbox(working)
     max_w = int(CANVAS_SIZE[0] * float(opts.get("tagline_max_w", 0.58)))
     max_h = int(CANVAS_SIZE[1] * float(opts.get("tagline_max_h", 0.46)))
@@ -381,10 +418,12 @@ def generate_company_donts(
     symbols_dir: Path | None = None,
     skip_files: set[str] | None = None,
     variant_options: dict | None = None,
+    exact_overrides: set[str] | None = None,
 ) -> None:
     dest_dir.mkdir(parents=True, exist_ok=True)
     logo = load_logo_image(primary_logo)
     skip = skip_files or set()
+    exact = exact_overrides or set()
     symbol_sources = {
         "06-without-symbol.png": "wordmark",
         "07-symbol-only.png": "symbol",
@@ -396,10 +435,22 @@ def generate_company_donts(
         dest = dest_dir / filename
         override_path = (override_dir / filename) if override_dir else None
         if override_path and override_path.exists():
-            if filename == "01-without-air-tagline.png":
+            if filename in exact:
+                if filename == "01-without-air-tagline.png":
+                    fit_override_exact(
+                        override_path, dest, variant_options=variant_options
+                    )
+                else:
+                    copy_override_exact(override_path, dest)
+            elif filename == "01-without-air-tagline.png":
                 apply_tagline_override(override_path, dest, variant_options=variant_options)
             else:
-                apply_override(override_path, dest)
+                apply_override(
+                    override_path,
+                    dest,
+                    filename=filename,
+                    variant_options=variant_options,
+                )
             continue
 
         if symbols_dir and filename in symbol_sources:

@@ -88,9 +88,14 @@ LOGO_EXTENSIONS = (".svg", ".png", ".jpg", ".jpeg")
 
 
 def pick_logo_file(directory: Path) -> str | None:
+    def rank(path: Path) -> tuple[int, int, str]:
+        ext_rank = 0 if path.suffix.lower() == ".png" else 1
+        numbered = bool(re.search(r"-\d+$", path.stem))
+        return (1 if numbered else 0, ext_rank, path.name.lower())
+
     candidates = sorted(
         (p for p in directory.iterdir() if p.suffix.lower() in LOGO_EXTENSIONS),
-        key=lambda p: (0 if p.suffix.lower() == ".png" else 1, p.name.lower()),
+        key=rank,
     )
     return str(candidates[0].resolve()) if candidates else None
 
@@ -241,6 +246,11 @@ def hidden_dont_files(company_id: str, overrides: dict[str, dict]) -> set[str]:
         name = item if item.endswith(".png") else f"{item}.png"
         files.add(name)
     return files
+
+
+def exact_dont_overrides(company_id: str, overrides: dict[str, dict]) -> set[str]:
+    exact = company_override(company_id, overrides).get("exact_dont_overrides", [])
+    return set(exact) if isinstance(exact, list) else set()
 
 
 DONT_VARIANT_KEYS = (
@@ -434,6 +444,7 @@ def write_company_assets(
             symbols_dir=symbols_dir if symbols_dir.exists() else None,
             skip_files=skip_files or None,
             variant_options=dont_variant_options(company["id"], company_overrides),
+            exact_overrides=exact_dont_overrides(company["id"], company_overrides),
         )
     else:
         copy_dont_assets(dest_dir)
