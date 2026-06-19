@@ -24,6 +24,10 @@
     "tagline_max_w": 0.86,
     "tagline_max_h": 0.72
   },
+  "bluefield-systems": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72
+  },
   "bcs-building-controls-and-services": {
     "tagline_max_w": 0.86,
     "tagline_max_h": 0.72
@@ -37,6 +41,8 @@
     "tagline_max_h": 0.72
   },
   "force-equipment": {
+    "tagline_max_w": 0.86,
+    "tagline_max_h": 0.72,
     "symbol_only_max_w": 0.78,
     "symbol_only_max_h": 0.66
   },
