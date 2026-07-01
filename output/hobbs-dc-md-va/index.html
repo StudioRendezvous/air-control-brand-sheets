@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hobbs DC MD VA — Endorsed Lockup Brand Sheet</title>
+  <style>
+    @page { size: 11in 8.5in landscape; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #F47920;
+      --off-black: #232121;
+      --white: #FFFFFF;
+      --gray: #6B6B6B;
+      --light-gray: #F5F5F5;
+      --green: #2E7D32;
+      --red: #C62828;
+    }
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: var(--off-black);
+      background: var(--white);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .sheet {
+      width: 11in;
+      min-height: 8.5in;
+      height: auto;
+      background: var(--white);
+      padding: 0.4in 0.52in 0.5in;
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      grid-template-rows: auto auto auto;
+      column-gap: 0.32in;
+      row-gap: 0.12in;
+    }
+    .section-rule {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      border: none;
+      border-top: 1px solid #E0E0E0;
+      margin: 0.18in 0 0.14in;
+    }
+    h1.section-title {
+      font-size: 15pt;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.14in;
+      line-height: 1;
+    }
+    .label {
+      font-size: 6.5pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.08in;
+    }
+    .logo-block {
+      grid-column: 1;
+      grid-row: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.02in;
+      padding-top: 0.1in;
+    }
+    .logo-block .section-title {
+      margin-bottom: 0.12in;
+    }
+    .logo-block .label {
+      color: var(--off-black);
+      margin-top: 0.08in;
+      margin-bottom: 0.14in;
+    }
+    .logo-display {
+      margin-bottom: 0.24in;
+      padding-top: 0.04in;
+    }
+    .logo-display img {
+      height: 1.1in;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: left center;
+      display: block;
+    }
+    .logo-primary {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 1.1in;
+    }
+    .logo-reversed {
+      background: var(--off-black);
+      border-radius: 2px;
+      padding: 0.12in 0.16in;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: fit-content;
+      max-width: 100%;
+    }
+    
+    .lockup-section {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 0.08in;
+      padding-top: 0.12in;
+    }
+    .lockup-section > * {
+      flex-shrink: 0;
+    }
+    .lockup-section .section-title { margin-bottom: 0.04in; }
+    .donts-col {
+      grid-column: 2;
+      grid-row: 1;
+      display: flex;
+      flex-direction: column;
+      align-self: stretch;
+      gap: 0.04in;
+      padding-top: 0.06in;
+    }
+    .donts-col .section-title {
+      font-size: 15pt;
+      margin-bottom: 0.12in;
+      flex-shrink: 0;
+    }
+    .donts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 0.96in);
+      column-gap: 0.14in;
+      row-gap: 0.14in;
+      justify-content: start;
+      align-items: start;
+    }
+    .dont-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.05in;
+      width: 0.96in;
+    }
+    .dont-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--off-black);
+      min-height: 0.34in;
+      display: flex;
+      align-items: flex-end;
+    }
+    .dont-art-frame {
+      width: 0.96in;
+      height: 0.85in;
+      border: 1px solid #D5D5D5;
+      border-radius: 2px;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .dont-art {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      display: block;
+    }
+    .intro {
+      font-size: 10.5pt;
+      line-height: 1.45;
+      color: var(--off-black);
+      max-width: 100%;
+    }
+    .intro strong { font-weight: 700; }
+    .rules-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.22in;
+      margin-top: 0.18in;
+      margin-bottom: 0.15in;
+    }
+    .rules-box {
+      border: 1px solid;
+      border-radius: 5px;
+      padding: 0.14in 0.16in 0.13in 0.2in;
+    }
+    .rules-box.do {
+      border-color: var(--green);
+    }
+    .rules-box.dont {
+      border-color: var(--red);
+    }
+    .rules-box h3 {
+      font-size: 10pt;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.07in;
+    }
+    .rules-box.do h3 { color: var(--green); }
+    .rules-box.dont h3 { color: var(--red); }
+    .rules-box ul {
+      list-style: none;
+      font-size: 9.25pt;
+      line-height: 1.4;
+    }
+    .rules-box li {
+      padding-left: 0.15in;
+      position: relative;
+      margin-bottom: 0.04in;
+    }
+    .rules-box.do li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+      font-size: 9.25pt;
+    }
+    .rules-box.dont li::before {
+      content: "✕";
+      position: absolute;
+      left: 0;
+      color: var(--red);
+      font-weight: 700;
+      font-size: 9.25pt;
+    }
+    .applications {
+      margin-top: 0.14in;
+      padding-top: 0.04in;
+    }
+    .applications h3 {
+      font-size: 11pt;
+      font-weight: 700;
+      margin-bottom: 0.12in;
+    }
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.18in;
+    }
+    .app-item {
+      position: relative;
+      background: var(--light-gray);
+      border-radius: 2px;
+      padding: 0.1in 0.1in 0.1in 0.14in;
+    }
+    .app-head {
+      display: block;
+      padding-right: 0.72in;
+      margin-bottom: 0.03in;
+    }
+    .app-name {
+      font-size: 10pt;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .app-badge {
+      position: absolute;
+      top: 0.08in;
+      right: 0.08in;
+      font-size: 6.25pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.025in 0.045in;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .app-badge.required { background: var(--off-black); color: var(--white); }
+    .app-badge.optional { background: #E0E0E0; color: var(--gray); }
+    .app-desc {
+      font-size: 8.5pt;
+      line-height: 1.35;
+      color: #444;
+      padding-right: 0.18in;
+    }
+    .footer {
+      margin-top: 0.1in;
+      padding-top: 0.09in;
+      padding-bottom: 0.02in;
+      border-top: 1px solid #E0E0E0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 0.2in;
+      row-gap: 0.14in;
+      align-items: flex-end;
+      font-size: 8.5pt;
+      line-height: 1.4;
+    }
+    .footer strong { font-weight: 700; }
+    .footer .portal { color: var(--orange); font-weight: 700; }
+    .footer-airlink,
+    .footer-questions {
+      text-align: left;
+    }
+    .footer-logo {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      padding-top: 0.08in;
+    }
+    .footer-logo img {
+      height: 0.58in;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: right bottom;
+      display: block;
+    }
+    .sheet-top-bar {
+      max-width: 11in;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .sheet-brand {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .sheet-brand img {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+    .sheet-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      padding: 6px 8px 6px 10px;
+      background: var(--off-black);
+      color: var(--white);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .sheet-nav a { color: var(--white); text-decoration: none; }
+    .sheet-nav a:hover { color: var(--orange); }
+    .nav-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-select {
+      min-width: 280px;
+      max-width: 340px;
+      width: auto;
+      margin-right: 12px;
+      padding: 5px 28px 5px 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: inherit;
+      background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23232121' d='M1 1l4 4 4-4'/%3E%3C/svg%3E") no-repeat right 10px center;
+      color: var(--off-black);
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .nav-btn {
+      padding: 5px 8px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.12);
+      white-space: nowrap;
+      font-size: 11px;
+    }
+    .nav-btn.disabled { opacity: 0.35; pointer-events: none; }
+    .nav-home {
+      font-weight: 600;
+      font-size: 11px;
+      white-space: nowrap;
+      padding-left: 20px;
+      border-left: 1px solid rgba(255,255,255,0.25);
+    }
+    @media print {
+      body { background: var(--white); padding: 0; }
+      .sheet-top-bar { display: none !important; }
+      .sheet {
+        height: 8.5in;
+        overflow: hidden;
+        page-break-after: avoid;
+      }
+    }
+    @media screen {
+      body { background: #A8A8A8; padding: 24px; }
+      .sheet { margin: 0 auto; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+      .sheet-brand img {
+        filter: brightness(0) invert(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet-top-bar">
+  <a class="sheet-brand" href="../index.html">
+    <img src="assets/air-control-primary-logo.svg" alt="AIR Control Concepts">
+  </a>
+  <nav class="sheet-nav" aria-label="Brand sheet navigation">
+    <div class="nav-controls">
+      <select class="nav-select" aria-label="Select company" onchange="if(this.value) window.location.href=this.value">
+        <option value="../advanced-thermal-solutions/index.html">Advanced Thermal Solutions</option><option value="../air-carolinas/index.html">Air Carolinas</option><option value="../air-components/index.html">Air Components</option><option value="../air-mission-critical/index.html">Air Mission Critical</option><option value="../airetech/index.html">Airetech</option><option value="../bcs-building-controls-and-services/index.html">BCS Building Controls and Services</option><option value="../bay-associates/index.html">Bay Associates</option><option value="../bluefield-systems/index.html">Bluefield Systems</option><option value="../c-j-building-solutions/index.html">C&J Building Solutions</option><option value="../cg-wood/index.html">CG Wood</option><option value="../cardinal-control-systems/index.html">Cardinal Control Systems</option><option value="../dorse/index.html">Dorse</option><option value="../ebs/index.html">EBS</option><option value="../eci/index.html">ECI</option><option value="../enerfit/index.html">EnerFit</option><option value="../energy-transfer-solutions/index.html">Energy Transfer Solutions</option><option value="../engineered-products/index.html">Engineered Products</option><option value="../etairos-hvac/index.html">Etairos HVAC</option><option value="../fes-fluid-equipment-solutions/index.html">FES Fluid Equipment Solutions</option><option value="../force-equipment/index.html">Force Equipment</option><option value="../georgia-air-associates/index.html">Georgia Air Associates</option><option value="../hd-grant-co/index.html">HD Grant Co</option><option value="../hobbs/index.html">Hobbs</option><option value="../hobbs-dc-md-va/index.html" selected>Hobbs DC MD VA</option><option value="../insight-partners/index.html">Insight Partners</option><option value="../jjp-mechanical-reps/index.html">JJP Mechanical Reps</option><option value="../jm-oconnor/index.html">JM OConnor</option><option value="../jmb-associates/index.html">JMB & Associates</option><option value="../jobe-industrial-control-measurement/index.html">Jobe Industrial Control & Measurement</option><option value="../jorban-riscoe/index.html">Jorban Riscoe</option><option value="../klima-nj/index.html">Klima NJ</option><option value="../klima-ny/index.html">Klima NY</option><option value="../mms-midwest-mechanical-solutions/index.html">MMS Midwest Mechanical Solutions</option><option value="../mri-mechanical-reps/index.html">MRI Mechanical Reps</option><option value="../marrs/index.html">Marrs</option><option value="../mechanical-and-plumbing-systems/index.html">Mechanical and Plumbing Systems</option><option value="../midwest-machinery/index.html">Midwest Machinery</option><option value="../nationwide-electric-supply/index.html">Nationwide Electric Supply</option><option value="../northrich-company/index.html">Northrich Company</option><option value="../odell-hvac/index.html">ODell HVAC</option><option value="../rea/index.html">REA</option><option value="../rl-craig-company/index.html">RL Craig Company</option><option value="../slade-ross-inc/index.html">Slade Ross Inc</option><option value="../stan-weaver/index.html">Stan Weaver</option><option value="../tko/index.html">TKO</option><option value="../technical-air-systems/index.html">Technical Air Systems</option><option value="../thermair-systems/index.html">ThermAir Systems</option>
+      </select>
+      <a class="nav-btn" href="../hobbs/index.html">← Prev</a>
+      <a class="nav-btn" href="../insight-partners/index.html">Next →</a>
+    </div>
+    <a class="nav-home" href="../index.html">All Companies</a>
+  </nav>
+</div>
+  <div class="sheet">
+    <div class="logo-block">
+      <h1 class="section-title">Logo</h1>
+
+      <div class="label">Primary</div>
+      <div class="logo-display logo-primary">
+        <img src="assets/Hobbs DC MD VA Logo-Air Company-RGB.png" alt="Hobbs DC MD VA primary endorsed lockup">
+      </div>
+
+      <div class="label">Reversed</div>
+      <div class="logo-display logo-reversed">
+        <img src="assets/Hobbs DC MD VA Logo-Air Company-Reverse-RGB.png" alt="Hobbs DC MD VA reversed endorsed lockup">
+      </div>
+    </div>
+
+    <div class="donts-col">
+      <h1 class="section-title">Don'ts</h1>
+      <div class="donts-grid">
+                <div class="dont-item">
+          <div class="dont-label">Without AIR Tagline</div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/01-without-air-tagline.png?v=202607011405" alt=""></div>
+        </div>
+
+        <div class="dont-item">
+          <div class="dont-label">On an Angle</div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/02-on-an-angle.png?v=202607011405" alt=""></div>
+        </div>
+        <div class="dont-item">
+          <div class="dont-label">Colors Changed</div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/03-colors-changed.png?v=202607011405" alt=""></div>
+        </div>
+        <div class="dont-item">
+          <div class="dont-label">Imperfect Scaling</div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/04-imperfect-scaling.png?v=202607011405" alt=""></div>
+        </div>
+        <div class="dont-item">
+          <div class="dont-label">On Colored Background</div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/05-on-colored-background.png?v=202607011405" alt=""></div>
+        </div>
+        
+        <div class="dont-item">
+          <div class="dont-label">Outlines</div>
+          <div class="dont-art-frame"><img class="dont-art" src="assets/donts/08-outlines.png?v=202607011405" alt=""></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-rule">
+
+    <div class="lockup-section">
+      <h1 class="section-title">Endorsed Lockup</h1>
+
+      <p class="intro">
+        Each operating company carries the <strong>AN AIR COMPANY</strong> endorsement mark beneath its name.
+        This signals platform membership — without replacing local brand identity. Your name stays primary;
+        the AIR lockup signals backing, scale, and shared standards.
+      </p>
+
+      <div class="rules-row">
+        <div class="rules-box do">
+          <h3>Do</h3>
+          <ul>
+            <li>Place the AN AIR COMPANY lockup directly below the OpCo logo</li>
+            <li>Use approved single-color (black or white) lockup on colored backgrounds</li>
+            <li>Maintain clear space equal to the letter-height of A in AIR on all sides</li>
+            <li>Apply consistently across all customer-facing touchpoints</li>
+            <li>Download files from the AIRlink portal — never recreate the lockup manually</li>
+          </ul>
+        </div>
+        <div class="rules-box dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Recreate, resize, or retype the endorsement mark by hand</li>
+            <li>Use the AIR primary wordmark in place of the endorsement lockup</li>
+            <li>Place the AIR logo separately as if it were a standalone brand</li>
+            <li>Alter proportions, colors, or spacing of the combined lockup</li>
+            <li>Apply the lockup over busy backgrounds without sufficient contrast</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="applications">
+        <h3>Field Applications</h3>
+        <div class="app-grid">
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">New Fleet Vehicles</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Full OpCo + AIR lockup on all new service vehicles and trailer wraps. White lockup for dark vehicles; color on white.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Business Cards</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">OpCo logo anchors card front. AN AIR COMPANY lockup in footer. Min. 6pt; never smaller than 80% of OpCo name.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Trade Show Signage</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Full-color lockup on booth banners, backdrops, and pop-up displays. AIR standards govern AIR-hosted events.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">New Building Signage</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Lockup on all new exterior and interior facility signage. Prioritize main entrance, reception, and customer areas.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Proposals &amp; Scope Docs</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Include on cover pages and running footers of customer-facing proposals, quotes, and scope documents.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Websites</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Add endorsement to website footer and About page. Link to aircontrolconcepts.com. Coordinate before homepage redesign.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Digital &amp; Social Media</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Include in LinkedIn, Facebook, and social profile bios. Email signature references AN AIR COMPANY below OpCo name.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Print &amp; Digital Collateral</span><span class="app-badge required">Required</span></div>
+            <p class="app-desc">Apply to all new brochures, sell sheets, spec sheets, capabilities decks, and email marketing templates.</p>
+          </div>
+          <div class="app-item">
+            <div class="app-head"><span class="app-name">Apparel</span><span class="app-badge optional">Optional</span></div>
+            <p class="app-desc">At OpCo discretion. AN AIR COMPANY may appear on sleeve or collar as secondary mark. OpCo name remains primary.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-airlink">
+          <strong>AIRlink Brand Portal</strong><br>
+          Download approved lockup files on <span class="portal">AIRlink Market COE</span>
+        </div>
+        <div class="footer-questions">
+          <strong>Questions?</strong><br>
+          AIR Marketing — marketing@aircontrolconcepts.com
+        </div>
+        <div class="footer-logo">
+          <img src="assets/air-control-primary-logo.svg" alt="AIR Control Concepts">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
