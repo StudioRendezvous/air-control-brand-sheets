@@ -176,7 +176,7 @@ def extract_asset_version(html: str) -> str:
     return match.group(1) if match else ""
 
 
-SITE_VERSION = "2026070201"
+SITE_VERSION = "2026070202"
 
 
 def company_pdf_filename(company: dict) -> str:
@@ -354,8 +354,12 @@ def render_sheet(
     company_overrides = company_overrides or {}
 
     if assets_mode == "relative" and primary and reverse:
-        primary = f"assets/{Path(primary).name}"
-        reverse = f"assets/{Path(reverse).name}"
+        primary = resolve_relative_logo(
+            company_id, company.get("primary_logo") or "", reverse=False
+        )
+        reverse = resolve_relative_logo(
+            company_id, company.get("reverse_logo") or "", reverse=True
+        )
 
     html = template
     html = html.replace("{{COMPANY_NAME}}", company["name"])
@@ -375,30 +379,37 @@ def render_sheet(
     return html
 
 
-def output_primary_logo_name(company_id: str) -> str | None:
-    """Primary logo filename already copied into output/{id}/assets/."""
+def output_logo_name(company_id: str, *, reverse: bool) -> str | None:
+    """Best primary or reverse logo filename already in output/{id}/assets/."""
     assets_dir = OUTPUT_DIR / company_id / "assets"
     if not assets_dir.is_dir():
         return None
 
-    def is_primary_logo(path: Path) -> bool:
+    def matches(path: Path) -> bool:
         name = path.name.lower()
         if path.suffix.lower() not in LOGO_EXTENSIONS:
             return False
         if "air-control" in name:
             return False
-        return "reverse" not in name
+        return ("reverse" in name) == reverse
 
-    def rank(path: Path) -> tuple[int, int, str]:
-        numbered = bool(re.search(r"-\d+$", path.stem))
+    def rank(path: Path) -> tuple[int, str]:
         ext_rank = 0 if path.suffix.lower() == ".png" else 1
-        return (1 if numbered else 0, ext_rank, path.name.lower())
+        return (ext_rank, path.name.lower())
 
-    candidates = sorted(
-        (p for p in assets_dir.iterdir() if is_primary_logo(p)),
-        key=rank,
-    )
+    candidates = sorted((p for p in assets_dir.iterdir() if matches(p)), key=rank)
     return candidates[0].name if candidates else None
+
+
+def resolve_relative_logo(company_id: str, logo_path: str, *, reverse: bool) -> str:
+    on_disk = output_logo_name(company_id, reverse=reverse)
+    if on_disk:
+        return f"assets/{on_disk}"
+    return f"assets/{Path(logo_path).name}"
+
+
+def output_primary_logo_name(company_id: str) -> str | None:
+    return output_logo_name(company_id, reverse=False)
 
 
 def write_index_page(companies: list[dict], dest: Path) -> None:
@@ -510,6 +521,22 @@ def write_company_assets(
     copy_air_logo(dest_dir)
 
 
+def sync_logos_only(company: dict, dest_dir: Path) -> None:
+    """Refresh primary/reverse logo files from exports without touching don'ts."""
+    assets_dir = dest_dir / "assets"
+    assets_dir.mkdir(parents=True, exist_ok=True)
+
+    for key in ("primary_logo", "reverse_logo"):
+        src = company.get(key)
+        if not src:
+            continue
+        source = Path(src)
+        if source.is_file():
+            target = assets_dir / source.name
+            write_logo_asset(source, target, reverse=(key == "reverse_logo"))
+    copy_air_logo(dest_dir)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--company", help="Generate only one company id or name")
@@ -532,6 +559,11 @@ def main() -> None:
         "--html-only",
         action="store_true",
         help="Rewrite index.html only (skip logo/don't asset regeneration)",
+    )
+    parser.add_argument(
+        "--sync-logos-only",
+        action="store_true",
+        help="Copy primary/reverse logos from exports only (skip don't regeneration)",
     )
     args = parser.parse_args()
 
@@ -581,7 +613,15 @@ def main() -> None:
         if use_folders:
             company_dir = OUTPUT_DIR / company["id"]
             out_path = company_dir / "index.html"
-            if args.html_only:
+            if args.sync_logos_only:
+                company_dir.mkdir(parents=True, exist_ok=True)
+                sync_logos_only(company, company_dir)
+                company_asset_version = (
+                    extract_asset_version(out_path.read_text(encoding="utf-8"))
+                    if out_path.is_file()
+                    else asset_version
+                )
+            elif args.html_only:
                 if not out_path.is_file():
                     print(f"Skipping {company['name']} — no existing {out_path}")
                     continue
