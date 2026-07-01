@@ -6,6 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
+  <meta name="site-version" content="2026070201">
   <title>JJP Mechanical Reps — Endorsed Lockup Brand Sheet</title>
   <style>
     @page { size: 8.5in 11in portrait; margin: 0; }
@@ -321,9 +322,10 @@
       max-width: 100%;
       margin: 0 auto 18px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: flex-start;
-      gap: 16px;
+      flex-wrap: wrap;
+      gap: 12px 16px;
     }
     .sheet-brand {
       display: flex;
@@ -346,17 +348,19 @@
       color: var(--white);
       border-radius: 6px;
       font-size: 12px;
+      max-width: 100%;
     }
     .sheet-nav a { color: var(--white); text-decoration: none; }
     .sheet-nav a:hover { color: var(--orange); }
     .nav-controls {
       display: inline-flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 4px;
     }
     .nav-select {
-      min-width: 280px;
-      max-width: 340px;
+      min-width: 220px;
+      max-width: min(340px, 100%);
       width: auto;
       margin-right: 12px;
       padding: 5px 28px 5px 10px;
@@ -390,8 +394,10 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      flex-wrap: wrap;
       gap: 12px;
       flex-shrink: 0;
+      max-width: 100%;
     }
     .sheet-download-btn {
       display: inline-flex;
@@ -406,6 +412,7 @@
       border-radius: 6px;
       white-space: nowrap;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      flex-shrink: 0;
     }
     .sheet-download-btn:hover {
       background: #e06a10;
@@ -448,7 +455,7 @@
   <nav class="sheet-nav" aria-label="Brand sheet navigation">
     <div class="nav-controls">
       <select class="nav-select" aria-label="Select company" onchange="if(this.value) window.location.href=this.value">
-        <option value="../advanced-thermal-solutions/index.html">Advanced Thermal Solutions</option><option value="../air-carolinas/index.html">Air Carolinas</option><option value="../air-components/index.html">Air Components</option><option value="../air-mission-critical/index.html">Air Mission Critical</option><option value="../airetech/index.html">Airetech</option><option value="../bay-associates/index.html">Bay Associates</option><option value="../bcs-building-controls-and-services/index.html">BCS Building Controls and Services</option><option value="../bluefield-systems/index.html">Bluefield Systems</option><option value="../c-j-building-solutions/index.html">C&J Building Solutions</option><option value="../cardinal-control-systems/index.html">Cardinal Control Systems</option><option value="../cg-wood/index.html">CG Wood</option><option value="../dorse/index.html">Dorse</option><option value="../ebs/index.html">EBS</option><option value="../eci/index.html">ECI</option><option value="../enerfit/index.html">EnerFit</option><option value="../energy-transfer-solutions/index.html">Energy Transfer Solutions</option><option value="../engineered-products/index.html">Engineered Products</option><option value="../etairos-hvac/index.html">Etairos HVAC</option><option value="../fes-fluid-equipment-solutions/index.html">FES Fluid Equipment Solutions</option><option value="../force-equipment/index.html">Force Equipment</option><option value="../georgia-air-associates/index.html">Georgia Air Associates</option><option value="../hd-grant-co/index.html">HD Grant Co</option><option value="../hobbs/index.html">Hobbs</option><option value="../hobbs-dc-md-va/index.html">Hobbs DC MD VA</option><option value="../insight-partners/index.html">Insight Partners</option><option value="../jjp-mechanical-reps/index.html" selected>JJP Mechanical Reps</option><option value="../jm-oconnor/index.html">JM OConnor</option><option value="../jmb-associates/index.html">JMB & Associates</option><option value="../jobe-industrial-control-measurement/index.html">Jobe Industrial Control & Measurement</option><option value="../jorban-riscoe/index.html">Jorban Riscoe</option><option value="../klima-nj/index.html">Klima NJ</option><option value="../klima-ny/index.html">Klima NY</option><option value="../marrs/index.html">Marrs</option><option value="../mechanical-and-plumbing-systems/index.html">Mechanical and Plumbing Systems</option><option value="../midwest-machinery/index.html">Midwest Machinery</option><option value="../mms-midwest-mechanical-solutions/index.html">MMS Midwest Mechanical Solutions</option><option value="../mri-mechanical-reps/index.html">MRI Mechanical Reps</option><option value="../nationwide-electric-supply/index.html">Nationwide Electric Supply</option><option value="../nelson-company/index.html">Nelson & Company</option><option value="../northrich-company/index.html">Northrich Company</option><option value="../odell-hvac/index.html">ODell HVAC</option><option value="../rea/index.html">REA</option><option value="../rl-craig-company/index.html">RL Craig Company</option><option value="../slade-ross-inc/index.html">Slade Ross Inc</option><option value="../stan-weaver/index.html">Stan Weaver</option><option value="../technical-air-systems/index.html">Technical Air Systems</option><option value="../thermair-systems/index.html">ThermAir Systems</option><option value="../tko/index.html">TKO</option>
+        <option value="../advanced-thermal-solutions/index.html">Advanced Thermal Solutions</option><option value="../air-carolinas/index.html">Air Carolinas</option><option value="../air-components/index.html">Air Components</option><option value="../air-mission-critical/index.html">Air Mission Critical</option><option value="../airetech/index.html">Airetech</option><option value="../bay-associates/index.html">Bay Associates</option><option value="../bcs-building-controls-and-services/index.html">BCS Building Controls and Services</option><option value="../bluefield-systems/index.html">Bluefield Systems</option><option value="../c-j-building-solutions/index.html">C&amp;J Building Solutions</option><option value="../cardinal-control-systems/index.html">Cardinal Control Systems</option><option value="../cg-wood/index.html">CG Wood</option><option value="../dorse/index.html">Dorse</option><option value="../ebs/index.html">EBS</option><option value="../eci/index.html">ECI</option><option value="../enerfit/index.html">EnerFit</option><option value="../energy-transfer-solutions/index.html">Energy Transfer Solutions</option><option value="../engineered-products/index.html">Engineered Products</option><option value="../etairos-hvac/index.html">Etairos HVAC</option><option value="../fes-fluid-equipment-solutions/index.html">FES Fluid Equipment Solutions</option><option value="../force-equipment/index.html">Force Equipment</option><option value="../georgia-air-associates/index.html">Georgia Air Associates</option><option value="../hd-grant-co/index.html">HD Grant Co</option><option value="../hobbs/index.html">Hobbs</option><option value="../hobbs-dc-md-va/index.html">Hobbs DC MD VA</option><option value="../insight-partners/index.html">Insight Partners</option><option value="../jjp-mechanical-reps/index.html" selected>JJP Mechanical Reps</option><option value="../jm-oconnor/index.html">JM OConnor</option><option value="../jmb-associates/index.html">JMB &amp; Associates</option><option value="../jobe-industrial-control-measurement/index.html">Jobe Industrial Control &amp; Measurement</option><option value="../jorban-riscoe/index.html">Jorban Riscoe</option><option value="../klima-nj/index.html">Klima NJ</option><option value="../klima-ny/index.html">Klima NY</option><option value="../marrs/index.html">Marrs</option><option value="../mechanical-and-plumbing-systems/index.html">Mechanical and Plumbing Systems</option><option value="../midwest-machinery/index.html">Midwest Machinery</option><option value="../mms-midwest-mechanical-solutions/index.html">MMS Midwest Mechanical Solutions</option><option value="../mri-mechanical-reps/index.html">MRI Mechanical Reps</option><option value="../nationwide-electric-supply/index.html">Nationwide Electric Supply</option><option value="../nelson-company/index.html">Nelson &amp; Company</option><option value="../northrich-company/index.html">Northrich Company</option><option value="../odell-hvac/index.html">ODell HVAC</option><option value="../rea/index.html">REA</option><option value="../rl-craig-company/index.html">RL Craig Company</option><option value="../slade-ross-inc/index.html">Slade Ross Inc</option><option value="../stan-weaver/index.html">Stan Weaver</option><option value="../technical-air-systems/index.html">Technical Air Systems</option><option value="../thermair-systems/index.html">ThermAir Systems</option><option value="../tko/index.html">TKO</option>
       </select>
       <a class="nav-btn" href="../insight-partners/index.html">← Prev</a>
       <a class="nav-btn" href="../jm-oconnor/index.html">Next →</a>

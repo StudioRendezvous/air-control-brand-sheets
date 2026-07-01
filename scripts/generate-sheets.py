@@ -176,16 +176,14 @@ def extract_asset_version(html: str) -> str:
     return match.group(1) if match else ""
 
 
+SITE_VERSION = "2026070201"
+
+
 def company_pdf_filename(company: dict) -> str:
     return f"Air Control - {company['name']} - An Air Company - Brand Sheet.pdf"
 
 
-def build_company_nav(
-    companies: list[dict],
-    current_id: str,
-    *,
-    pdf_filename: str | None = None,
-) -> str:
+def build_company_nav(companies: list[dict], current_id: str) -> str:
     ready = ready_companies(companies)
     if not ready:
         return ""
@@ -195,7 +193,7 @@ def build_company_nav(
         selected = " selected" if company["id"] == current_id else ""
         options.append(
             f'<option value="../{company["id"]}/index.html"{selected}>'
-            f'{company["name"]}</option>'
+            f'{html.escape(company["name"])}</option>'
         )
 
     current_idx = next(
@@ -225,8 +223,9 @@ def build_company_nav(
     )
 
     pdf_link = ""
-    if pdf_filename:
-        safe_href = html.escape(pdf_filename, quote=True)
+    current = next((c for c in ready if c["id"] == current_id), None)
+    if current:
+        safe_href = html.escape(company_pdf_filename(current), quote=True)
         pdf_link = (
             f'<a class="sheet-download-btn" href="{safe_href}" download>'
             f"Download PDF</a>"
@@ -363,6 +362,7 @@ def render_sheet(
     html = html.replace("{{PRIMARY_LOGO}}", primary)
     html = html.replace("{{REVERSE_LOGO}}", reverse)
     html = html.replace("{{COMPANY_NAV}}", nav_html)
+    html = html.replace("{{SITE_VERSION}}", SITE_VERSION)
     html = html.replace("{{ASSET_VERSION}}", asset_version)
     html = html.replace("{{LOGO_EXTRA_CSS}}", build_logo_extra_css(company_id, company_overrides))
     html = html.replace(
@@ -410,20 +410,21 @@ def write_index_page(companies: list[dict], dest: Path) -> None:
             f'      <a class="company-card" href="{c["id"]}/index.html">'
             f'<img class="company-logo" src="{c["id"]}/assets/{logo_name}" '
             f'alt="" loading="lazy">'
-            f'<span class="company-name">{c["name"]}</span>'
+            f'<span class="company-name">{html.escape(c["name"])}</span>'
             f'<span class="company-arrow">→</span></a>'
         )
     cards_html = "\n".join(cards)
     options = "\n".join(
-        f'        <option value="{c["id"]}/index.html">{c["name"]}</option>'
+        f'        <option value="{c["id"]}/index.html">{html.escape(c["name"])}</option>'
         for c in ready
     )
 
     template = INDEX_TEMPLATE.read_text(encoding="utf-8")
-    html = template.replace("{{COMPANY_COUNT}}", str(len(ready)))
-    html = html.replace("{{COMPANY_CARDS}}", cards_html)
-    html = html.replace("{{COMPANY_OPTIONS}}", options)
-    dest.write_text(html, encoding="utf-8")
+    page_html = template.replace("{{COMPANY_COUNT}}", str(len(ready)))
+    page_html = page_html.replace("{{SITE_VERSION}}", SITE_VERSION)
+    page_html = page_html.replace("{{COMPANY_CARDS}}", cards_html)
+    page_html = page_html.replace("{{COMPANY_OPTIONS}}", options)
+    dest.write_text(page_html, encoding="utf-8")
 
 
 def copy_dont_assets(dest_dir: Path) -> None:
@@ -596,13 +597,7 @@ def main() -> None:
                     company_overrides=company_overrides,
                 )
                 company_asset_version = asset_version
-            pdf_name = company_pdf_filename(company)
-            pdf_path = company_dir / pdf_name
-            nav_html = build_company_nav(
-                all_companies,
-                company["id"],
-                pdf_filename=pdf_name if pdf_path.is_file() else None,
-            )
+            nav_html = build_company_nav(all_companies, company["id"])
             html = render_sheet(
                 template,
                 company,
