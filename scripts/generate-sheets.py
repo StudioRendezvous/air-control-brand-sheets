@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import re
 import sys
@@ -160,14 +161,31 @@ def load_template() -> str:
 
 
 def ready_companies(companies: list[dict]) -> list[dict]:
-    return [
-        c
-        for c in companies
-        if c.get("primary_logo") and c.get("reverse_logo")
-    ]
+    return sorted(
+        (
+            c
+            for c in companies
+            if c.get("primary_logo") and c.get("reverse_logo")
+        ),
+        key=lambda c: c["name"].lower(),
+    )
 
 
-def build_company_nav(companies: list[dict], current_id: str) -> str:
+def extract_asset_version(html: str) -> str:
+    match = re.search(r"\?v=(\d+)", html)
+    return match.group(1) if match else ""
+
+
+def company_pdf_filename(company: dict) -> str:
+    return f"Air Control - {company['name']} - An Air Company - Brand Sheet.pdf"
+
+
+def build_company_nav(
+    companies: list[dict],
+    current_id: str,
+    *,
+    pdf_filename: str | None = None,
+) -> str:
     ready = ready_companies(companies)
     if not ready:
         return ""
@@ -206,10 +224,19 @@ def build_company_nav(companies: list[dict], current_id: str) -> str:
         else '<span class="nav-btn disabled">Next →</span>'
     )
 
+    pdf_link = ""
+    if pdf_filename:
+        safe_href = html.escape(pdf_filename, quote=True)
+        pdf_link = (
+            f'<a class="sheet-download-btn" href="{safe_href}" download>'
+            f"Download PDF</a>"
+        )
+
     return f"""<div class="sheet-top-bar">
   <a class="sheet-brand" href="../index.html">
     <img src="assets/air-control-primary-logo.svg" alt="AIR Control Concepts">
   </a>
+  <div class="sheet-top-bar-right">
   <nav class="sheet-nav" aria-label="Brand sheet navigation">
     <div class="nav-controls">
       <select class="nav-select" aria-label="Select company" onchange="if(this.value) window.location.href=this.value">
@@ -220,6 +247,8 @@ def build_company_nav(companies: list[dict], current_id: str) -> str:
     </div>
     <a class="nav-home" href="../index.html">All Companies</a>
   </nav>
+  {pdf_link}
+  </div>
 </div>"""
 
 
@@ -498,6 +527,11 @@ def main() -> None:
         action="store_true",
         help="Skip generating output/index.html navigation page",
     )
+    parser.add_argument(
+        "--html-only",
+        action="store_true",
+        help="Rewrite index.html only (skip logo/don't asset regeneration)",
+    )
     args = parser.parse_args()
 
     exports_root = resolve_exports_root()
@@ -545,24 +579,39 @@ def main() -> None:
 
         if use_folders:
             company_dir = OUTPUT_DIR / company["id"]
-            company_dir.mkdir(parents=True, exist_ok=True)
-            write_company_assets(
-                company,
-                company_dir,
-                no_symbol_dont_ids=no_symbol_dont_ids,
-                company_overrides=company_overrides,
+            out_path = company_dir / "index.html"
+            if args.html_only:
+                if not out_path.is_file():
+                    print(f"Skipping {company['name']} — no existing {out_path}")
+                    continue
+                company_asset_version = extract_asset_version(
+                    out_path.read_text(encoding="utf-8")
+                )
+            else:
+                company_dir.mkdir(parents=True, exist_ok=True)
+                write_company_assets(
+                    company,
+                    company_dir,
+                    no_symbol_dont_ids=no_symbol_dont_ids,
+                    company_overrides=company_overrides,
+                )
+                company_asset_version = asset_version
+            pdf_name = company_pdf_filename(company)
+            pdf_path = company_dir / pdf_name
+            nav_html = build_company_nav(
+                all_companies,
+                company["id"],
+                pdf_filename=pdf_name if pdf_path.is_file() else None,
             )
-            nav_html = build_company_nav(all_companies, company["id"])
             html = render_sheet(
                 template,
                 company,
                 assets_mode="relative",
                 nav_html=nav_html,
-                asset_version=asset_version,
+                asset_version=company_asset_version,
                 no_symbol_dont_ids=no_symbol_dont_ids,
                 company_overrides=company_overrides,
             )
-            out_path = company_dir / "index.html"
         else:
             copy_dont_assets(OUTPUT_DIR)
             copy_air_logo(OUTPUT_DIR)

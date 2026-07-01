@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>{{COMPANY_NAME}} — Endorsed Lockup Brand Sheet</title>
   <style>
-    @page { size: 11in 8.5in landscape; margin: 0; }
+    @page { size: 8.5in 11in portrait; margin: 0; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --orange: #F47920;
@@ -314,11 +317,12 @@
       display: block;
     }
     .sheet-top-bar {
-      max-width: 11in;
+      width: 11in;
+      max-width: 100%;
       margin: 0 auto 18px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 16px;
     }
     .sheet-brand {
@@ -326,6 +330,7 @@
       align-items: center;
       flex-shrink: 0;
       text-decoration: none;
+      margin-right: auto;
     }
     .sheet-brand img {
       height: 38px;
@@ -381,13 +386,48 @@
       padding-left: 20px;
       border-left: 1px solid rgba(255,255,255,0.25);
     }
+    .sheet-top-bar-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .sheet-download-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 14px;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      border-radius: 6px;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .sheet-download-btn:hover {
+      background: #e06a10;
+      color: var(--white);
+    }
     @media print {
-      body { background: var(--white); padding: 0; }
+      body {
+        background: var(--white);
+        padding: 0.5in 0 0.15in;
+        margin: 0;
+      }
       .sheet-top-bar { display: none !important; }
+      .sheet-download-btn { display: none !important; }
       .sheet {
-        height: 8.5in;
-        overflow: hidden;
+        width: 11in;
+        height: auto !important;
+        min-height: 0;
+        overflow: visible !important;
+        box-shadow: none;
+        margin: 0 auto;
         page-break-after: avoid;
+        page-break-inside: avoid;
       }
     }
     @media screen {
