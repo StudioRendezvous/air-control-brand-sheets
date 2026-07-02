@@ -176,11 +176,39 @@ def extract_asset_version(html: str) -> str:
     return match.group(1) if match else ""
 
 
-SITE_VERSION = "2026070202"
+SITE_VERSION = "2026070203"
 
 
 def company_pdf_filename(company: dict) -> str:
     return f"Air Control - {company['name']} - An Air Company - Brand Sheet.pdf"
+
+
+def company_logos_zip_filename(company: dict) -> str:
+    return f"Air Control - {company['name']} - An Air Company - Logos.zip"
+
+
+def logos_zip_path(company_id: str, company: dict) -> Path:
+    return OUTPUT_DIR / company_id / company_logos_zip_filename(company)
+
+
+def build_download_links(company_id: str, company: dict) -> str:
+    links = []
+    safe_pdf = html.escape(company_pdf_filename(company), quote=True)
+    links.append(
+        f'<a class="sheet-download-btn" href="{safe_pdf}" download>'
+        f"Download PDF</a>"
+    )
+    if logos_zip_path(company_id, company).is_file():
+        safe_zip = html.escape(company_logos_zip_filename(company), quote=True)
+        links.append(
+            f'<a class="sheet-download-btn sheet-download-logos" href="{safe_zip}" download>'
+            f"Download Logos</a>"
+        )
+    return (
+        f'<div class="sheet-download-actions">{"".join(links)}</div>'
+        if links
+        else ""
+    )
 
 
 def build_company_nav(companies: list[dict], current_id: str) -> str:
@@ -225,11 +253,7 @@ def build_company_nav(companies: list[dict], current_id: str) -> str:
     pdf_link = ""
     current = next((c for c in ready if c["id"] == current_id), None)
     if current:
-        safe_href = html.escape(company_pdf_filename(current), quote=True)
-        pdf_link = (
-            f'<a class="sheet-download-btn" href="{safe_href}" download>'
-            f"Download PDF</a>"
-        )
+        pdf_link = build_download_links(current_id, current)
 
     return f"""<div class="sheet-top-bar">
   <a class="sheet-brand" href="../index.html">

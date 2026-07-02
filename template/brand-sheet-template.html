@@ -399,6 +399,12 @@
       flex-shrink: 0;
       max-width: 100%;
     }
+    .sheet-download-actions {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
     .sheet-download-btn {
       display: inline-flex;
       align-items: center;
@@ -418,6 +424,14 @@
       background: #e06a10;
       color: var(--white);
     }
+    .sheet-download-btn.sheet-download-logos {
+      background: var(--off-black);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .sheet-download-btn.sheet-download-logos:hover {
+      background: #3a3a3a;
+      color: var(--white);
+    }
     @media print {
       body {
         background: var(--white);
@@ -425,6 +439,7 @@
         margin: 0;
       }
       .sheet-top-bar { display: none !important; }
+      .sheet-download-actions { display: none !important; }
       .sheet-download-btn { display: none !important; }
       .sheet {
         width: 11in;

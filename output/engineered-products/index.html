@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="site-version" content="2026070202">
+  <meta name="site-version" content="2026070203">
   <title>Engineered Products — Endorsed Lockup Brand Sheet</title>
   <style>
     @page { size: 8.5in 11in portrait; margin: 0; }
@@ -399,6 +399,12 @@
       flex-shrink: 0;
       max-width: 100%;
     }
+    .sheet-download-actions {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
     .sheet-download-btn {
       display: inline-flex;
       align-items: center;
@@ -418,6 +424,14 @@
       background: #e06a10;
       color: var(--white);
     }
+    .sheet-download-btn.sheet-download-logos {
+      background: var(--off-black);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .sheet-download-btn.sheet-download-logos:hover {
+      background: #3a3a3a;
+      color: var(--white);
+    }
     @media print {
       body {
         background: var(--white);
@@ -425,6 +439,7 @@
         margin: 0;
       }
       .sheet-top-bar { display: none !important; }
+      .sheet-download-actions { display: none !important; }
       .sheet-download-btn { display: none !important; }
       .sheet {
         width: 11in;
@@ -462,7 +477,7 @@
     </div>
     <a class="nav-home" href="../index.html">All Companies</a>
   </nav>
-  <a class="sheet-download-btn" href="Air Control - Engineered Products - An Air Company - Brand Sheet.pdf" download>Download PDF</a>
+  <div class="sheet-download-actions"><a class="sheet-download-btn" href="Air Control - Engineered Products - An Air Company - Brand Sheet.pdf" download>Download PDF</a><a class="sheet-download-btn sheet-download-logos" href="Air Control - Engineered Products - An Air Company - Logos.zip" download>Download Logos</a></div>
   </div>
 </div>
   <div class="sheet">
