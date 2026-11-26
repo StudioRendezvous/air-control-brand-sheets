@@ -176,7 +176,7 @@ def extract_asset_version(html: str) -> str:
     return match.group(1) if match else ""
 
 
-SITE_VERSION = "2026070203"
+SITE_VERSION = "2026112501"
 
 
 def company_pdf_filename(company: dict) -> str:
@@ -324,6 +324,38 @@ def dont_variant_options(company_id: str, overrides: dict[str, dict]) -> dict:
     return {key: cfg[key] for key in DONT_VARIANT_KEYS if key in cfg}
 
 
+def build_extra_logos(company: dict, *, assets_mode: str) -> str:
+    extras = company.get("extra_logos") or []
+    if not extras:
+        return ""
+
+    items = []
+    for extra in extras:
+        logo_path = extra.get("path") or ""
+        if not logo_path:
+            continue
+        src = (
+            f"assets/{Path(logo_path).name}"
+            if assets_mode == "relative"
+            else logo_path
+        )
+        label = html.escape(extra.get("label") or "Option")
+        classes = "logo-option logo-option-reverse" if extra.get("reverse") else "logo-option"
+        items.append(
+            f'<div class="{classes}">'
+            f'<div class="label">{label}</div>'
+            f'<img src="{html.escape(src, quote=True)}" alt="{html.escape(company["name"])} {label}">'
+            f"</div>"
+        )
+    if not items:
+        return ""
+    return (
+        '<div class="logo-options">'
+        f'<div class="logo-options-grid">{"".join(items)}</div>'
+        "</div>"
+    )
+
+
 def build_logo_extra_css(company_id: str, overrides: dict[str, dict]) -> str:
     height = company_override(company_id, overrides).get("logo_height")
     if not height:
@@ -389,6 +421,10 @@ def render_sheet(
     html = html.replace("{{COMPANY_NAME}}", company["name"])
     html = html.replace("{{PRIMARY_LOGO}}", primary)
     html = html.replace("{{REVERSE_LOGO}}", reverse)
+    html = html.replace(
+        "{{EXTRA_LOGOS}}",
+        build_extra_logos(company, assets_mode=assets_mode),
+    )
     html = html.replace("{{COMPANY_NAV}}", nav_html)
     html = html.replace("{{SITE_VERSION}}", SITE_VERSION)
     html = html.replace("{{ASSET_VERSION}}", asset_version)
@@ -426,10 +462,14 @@ def output_logo_name(company_id: str, *, reverse: bool) -> str | None:
 
 
 def resolve_relative_logo(company_id: str, logo_path: str, *, reverse: bool) -> str:
+    preferred = Path(logo_path).name
+    assets_dir = OUTPUT_DIR / company_id / "assets"
+    if preferred and (assets_dir / preferred).is_file():
+        return f"assets/{preferred}"
     on_disk = output_logo_name(company_id, reverse=reverse)
     if on_disk:
         return f"assets/{on_disk}"
-    return f"assets/{Path(logo_path).name}"
+    return f"assets/{preferred}"
 
 
 def output_primary_logo_name(company_id: str) -> str | None:
@@ -513,6 +553,18 @@ def write_company_assets(
         if source.exists():
             target = assets_dir / source.name
             write_logo_asset(source, target, reverse=(key == "reverse_logo"))
+
+    for extra in company.get("extra_logos") or []:
+        src = extra.get("path")
+        if not src:
+            continue
+        source = Path(src)
+        if source.is_file():
+            write_logo_asset(
+                source,
+                assets_dir / source.name,
+                reverse=bool(extra.get("reverse")),
+            )
 
     no_symbol_dont_ids = no_symbol_dont_ids or set()
     company_overrides = company_overrides or {}

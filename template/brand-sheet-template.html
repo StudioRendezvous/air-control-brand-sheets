@@ -105,6 +105,36 @@
       width: fit-content;
       max-width: 100%;
     }
+    .logo-options {
+      margin-top: 0.04in;
+    }
+    .logo-options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.1in 0.14in;
+    }
+    .logo-option .label {
+      margin-top: 0;
+      margin-bottom: 0.04in;
+    }
+    .logo-option img {
+      height: 0.62in;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: left center;
+      display: block;
+    }
+    .logo-option-reverse {
+      background: var(--off-black);
+      border-radius: 2px;
+      padding: 0.06in 0.08in 0.08in;
+      width: fit-content;
+      max-width: 100%;
+    }
+    .logo-option-reverse .label {
+      color: var(--white);
+    }
     {{LOGO_EXTRA_CSS}}
     .lockup-section {
       grid-column: 1 / -1;
@@ -476,6 +506,7 @@
       <div class="logo-display logo-reversed">
         <img src="{{REVERSE_LOGO}}" alt="{{COMPANY_NAME}} reversed endorsed lockup">
       </div>
+      {{EXTRA_LOGOS}}
     </div>
 
     <div class="donts-col">

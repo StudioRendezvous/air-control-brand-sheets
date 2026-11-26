@@ -84,6 +84,13 @@
     "reverse_logo": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/Dorse - An Air Company/RGB - Digital/Reverse Logo - RGB/Dorse Logo-Air Company-Reverse-RGB.png"
   },
   {
+    "id": "dolphin-equipment",
+    "name": "Dolphin Equipment",
+    "folder": "Dolphin Equipment - An Air Company",
+    "primary_logo": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/Dolphin Equipment - An Air Company/RGB - Digital/Primary Logo - RGB/Dolphin Equipment Logo-Air Company-RGB.png",
+    "reverse_logo": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/Dolphin Equipment - An Air Company/RGB - Digital/Secondary Logo - RGB (use on dark BG)/Dolphin Equipment Logo-Air Company-Secondary-RGB.png"
+  },
+  {
     "id": "ebs",
     "name": "EBS",
     "folder": "EBS - An Air Company",
@@ -123,7 +130,29 @@
     "name": "Etairos HVAC",
     "folder": "Etairos HVAC - An Air Company",
     "primary_logo": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/Etairos HVAC - An Air Company/RGB - Digital/Primary Logo - Horizontal - RGB/Etairos HVAC Logo - Horizontal -Air Company-RGB.png",
-    "reverse_logo": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/Etairos HVAC - An Air Company/RGB - Digital/Reverse Logo - Horizontal - RGB/Etairos HVAC Logo - Reverse - Air Company-Reverse-RGB.png"
+    "reverse_logo": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/Etairos HVAC - An Air Company/RGB - Digital/Reverse Logo - Horizontal - RGB/Etairos HVAC Logo - Reverse - Air Company-Reverse-RGB.png",
+    "extra_logos": [
+      {
+        "label": "Stacked",
+        "path": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/Etairos HVAC - An Air Company/RGB - Digital/Primary Logo - Stacked - RGB/Etairos HVAC Logo - Stacked -Air Company-RGB.png",
+        "reverse": false
+      },
+      {
+        "label": "Stacked reversed",
+        "path": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/Etairos HVAC - An Air Company/RGB - Digital/Reverse Logo - Stacked - RGB/Etairos HVAC Logo - Stacked- Air Company-Reverse-RGB.png",
+        "reverse": true
+      },
+      {
+        "label": "Reverse with fill",
+        "path": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/Etairos HVAC - An Air Company/RGB - Digital/Reverse with Fill Logo - Horizontal - RGB/Etairos HVAC Logo - Air Company-Reverse with Fill-RGB.png",
+        "reverse": true
+      },
+      {
+        "label": "Stacked reverse with fill",
+        "path": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/Etairos HVAC - An Air Company/RGB - Digital/Reverse with Fill Logo - Stacked - RGB/Etairos HVAC Logo - Stacked -Air Company-Reverse with Fill-RGB.png",
+        "reverse": true
+      }
+    ]
   },
   {
     "id": "fes-fluid-equipment-solutions",
@@ -229,6 +258,13 @@
     "folder": "MMS Midwest Mechanical Solutions - An Air Company",
     "primary_logo": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/MMS Midwest Mechanical Solutions - An Air Company/RGB - Digital/Primary Logo - RGB/MMS Midwest Mechanical Solutions Logo-Air Company-RGB.png",
     "reverse_logo": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/MMS Midwest Mechanical Solutions - An Air Company/RGB - Digital/Reverse Logo - RGB/MMS Midwest Mechanical Solutions Logo-Air Company-Reverse-RGB.png"
+  },
+  {
+    "id": "motor-control-specialties",
+    "name": "Motor Control Specialties",
+    "folder": "Motor Control Specialties - An Air Company",
+    "primary_logo": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/Motor Control Specialties - An Air Company/RGB - Digital/Primary Logo - RGB/Motor Control Specialties Logo-Air Company-RGB.png",
+    "reverse_logo": "/Users/shanefrench/Studio Rendezvous Dropbox/Studio Rendezvous Team/Content Matterz/Air Control/Brand Sheets/03 AIR Cursor Work/assets/03 Exports/Motor Control Specialties - An Air Company/RGB - Digital/Reverse Logo - RGB/Motor Control Specialties Logo-Air Company-Reverse-RGB.png"
   },
   {
     "id": "mri-mechanical-reps",
