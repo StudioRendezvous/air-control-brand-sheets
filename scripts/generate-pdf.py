@@ -15,6 +15,8 @@ DATA_FILE = ROOT / "data" / "companies.json"
 # Letter portrait — full sheet (11in wide) is scaled to fit on one page.
 PAGE_WIDTH_IN = 8.5
 PAGE_HEIGHT_IN = 11.0
+# Stay short of the page edge so rounding does not add a blank second page.
+USABLE_PAGE_HEIGHT_IN = 10.85
 SHEET_WIDTH_IN = 11.0
 # Keep in sync with @media print body padding in brand-sheet-template.html
 PRINT_TOP_PADDING_IN = 0.5
@@ -29,7 +31,7 @@ def company_pdf_filename(company: dict) -> str:
 def sheet_scale_for_letter(content_height_px: float) -> float:
     content_height_in = content_height_px / CSS_PX_PER_IN
     width_scale = PAGE_WIDTH_IN / SHEET_WIDTH_IN
-    height_scale = PAGE_HEIGHT_IN / content_height_in
+    height_scale = USABLE_PAGE_HEIGHT_IN / content_height_in if content_height_in else 1.0
     return min(width_scale, height_scale, 1.0)
 
 

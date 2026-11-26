@@ -340,12 +340,13 @@ def build_extra_logos(company: dict, *, assets_mode: str) -> str:
             else logo_path
         )
         label = html.escape(extra.get("label") or "Option")
-        classes = "logo-option logo-option-reverse" if extra.get("reverse") else "logo-option"
+        art_class = "logo-option-art logo-option-reverse" if extra.get("reverse") else "logo-option-art"
         items.append(
-            f'<div class="{classes}">'
+            f'<div class="logo-option">'
             f'<div class="label">{label}</div>'
+            f'<div class="{art_class}">'
             f'<img src="{html.escape(src, quote=True)}" alt="{html.escape(company["name"])} {label}">'
-            f"</div>"
+            f"</div></div>"
         )
     if not items:
         return ""
